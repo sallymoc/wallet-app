@@ -5,7 +5,7 @@ name: 🔧 Flutter CI
 on:
   push:
     branches:
-      - test/workflow
+      - test/workflow # to remove after testing is ok
       - main
       - develop
       - release/*

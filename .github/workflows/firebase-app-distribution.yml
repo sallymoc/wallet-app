@@ -32,8 +32,8 @@ jobs:
       - name: 📦 Install Flutter dependencies
         run: flutter pub get
 
-      - name: 🏗️ Build release APK
-        run: flutter build apk --release --no-split-per-abi
+      - name: 🏗️ Build Universal Release APK
+        run: flutter build apk --release --target-platform android-arm,android-arm64,android-x64
 
       - name: 📁 Install Firebase CLI
         run: npm install -g firebase-tools

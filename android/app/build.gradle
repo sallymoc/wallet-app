@@ -79,6 +79,13 @@ android {
             }
        }
    }
+
+   splits {
+        abi {
+            enable false
+        }
+    }
+
 }
 
 flutter {

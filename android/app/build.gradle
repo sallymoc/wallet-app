@@ -62,30 +62,28 @@ android {
     }
 
     signingConfigs {
-       release {
-            if (keystoreProperties['storeFile']) {
-                keyAlias keystoreProperties['keyAlias']
-                keyPassword keystoreProperties['keyPassword']
-                storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
-                storePassword keystoreProperties['storePassword']
-            }
+       local {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile keystoreProperties['storeFile']
+            storePassword keystoreProperties['storePassword']
        }
+
+        ci {
+            keyAlias System.getenv("KEY_ALIAS")
+            keyPassword System.getenv("KEY_PASSWORD")
+            storeFile file("my-release-key.keystore")
+            storePassword System.getenv("KEYSTORE_PASSWORD")
+        }
    }
    buildTypes {
        release {
-            // Only use signing config if key.properties exists
-            if (keystoreProperties['storeFile']) {
-                signingConfig signingConfigs.debug // only for testing
-            }
-       }
-   }
-
-   splits {
-        abi {
-            enable false
+            // Default to local keystore
+            signingConfig project.hasProperty("CI") && CI.toBoolean()
+                ? signingConfigs.ci
+                : signingConfigs.local
         }
-    }
-
+   }
 }
 
 flutter {

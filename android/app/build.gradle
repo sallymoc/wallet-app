@@ -72,15 +72,15 @@ android {
         ci {
             keyAlias System.getenv("KEY_ALIAS")
             keyPassword System.getenv("KEY_PASSWORD")
-            storeFile file("my-release-key.keystore")
+            storeFile file("ci-release-key.keystore")
             storePassword System.getenv("KEYSTORE_PASSWORD")
         }
    }
    buildTypes {
        release {
             // Default to local keystore
-            signingConfig project.hasProperty("CI") && CI.toBoolean()
-                ? signingConfigs.ci
+            signingConfig System.getenv("CI") == "true" 
+                ? signingConfigs.ci 
                 : signingConfigs.local
         }
    }

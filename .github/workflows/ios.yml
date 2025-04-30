@@ -3,7 +3,7 @@ name: 📦 iOS TestFlight Release
 on:
   push:
     branches:
-      #- test/workflow # to remove after testing is ok
+      - test/workflow # to remove after testing is ok
       - develop
       - release/*
       - hotfix/*

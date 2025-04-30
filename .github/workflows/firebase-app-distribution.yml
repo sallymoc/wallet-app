@@ -33,7 +33,10 @@ jobs:
         run: flutter pub get
 
       - name: 🔐 Decode keystore from GitHub secret
-        run: echo "$ANDROID_KEYSTORE_BASE64" | base64 --decode > ci-release-key.keystore
+        run: echo "$ANDROID_KEYSTORE_BASE64" | base64 --decode > android/app/ci-release-key.keystore
+
+      - name: ✅ Confirm keystore file exists
+        run: ls -l android/app/ci-release-key.keystore
 
       - name: 🏗️ Build Universal Release APK
         run: flutter build apk --release #--target-platform android-arm,android-arm64,android-x64

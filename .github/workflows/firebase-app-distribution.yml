@@ -32,8 +32,10 @@ jobs:
       - name: 📦 Install Flutter dependencies
         run: flutter pub get
 
-      - name: 🔐 Decode keystore from GitHub secret
+      - name: 🔐 Decode keystore
         run: echo "$ANDROID_KEYSTORE_BASE64" | base64 --decode > android/app/ci-release-key.keystore
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
 
       - name: ✅ Confirm keystore file exists
         run: ls -l android/app/ci-release-key.keystore

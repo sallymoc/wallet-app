@@ -42,10 +42,16 @@ platform :ios do
     xcversion(version: ENV["XCODE_VERSION"])
 
     app_store_connect_api_key(
-      key_id: ENV["APP_STORE_KEY_ID"],
-      issuer_id: ENV["APP_STORE_ISSUER_ID"],
-      key_filepath: "AuthKey.p8"
+      key_id: ENV['APP_STORE_KEY_ID'],
+      issuer_id: ENV['APP_STORE_ISSUER_ID'],
+      key_filepath: './AuthKey.p8',
+      in_house: false
     )
+
+    # This calls a harmless API to list apps you have access to
+    Spaceship::ConnectAPI::App.all.each do |app|
+      UI.message("Found app: #{app.name} (#{app.bundle_id})")
+    end
 
     build_app(
       scheme: "Runner",

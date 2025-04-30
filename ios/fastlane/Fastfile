@@ -52,10 +52,10 @@ platform :ios do
       in_house: false
     )
 
-    # This calls a harmless API to list apps you have access to
-    Spaceship::ConnectAPI::App.all.each do |app|
-      UI.message("Found app: #{app.name} (#{app.bundle_id})")
-    end
+    UI.message("✅ API key authentication succeeded.")
+
+    apps = Spaceship::ConnectAPI::App.all
+    UI.message("🔍 Found #{apps.count} app(s) in App Store Connect.")
 
     build_app(
       scheme: "Runner",

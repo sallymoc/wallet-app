@@ -62,16 +62,15 @@ platform :ios do
     build_app(
       scheme: "Runner",
       export_method: "app-store",
-      configuration: "Release",   # FORCE Release build
-      skip_package_ipa: false,
+      configuration: "Release",
       clean: true,
       xcargs: "-allowProvisioningUpdates",
       export_options: {
-        signingStyle: "automatic",  # Let Xcode handle the signing
-        method: "app-store",  # Export method for distribution to TestFlight
+        signingStyle: "automatic",
         manageAppVersionAndBuildNumber: true
       }
     )
+    
      #build_app(
       # scheme: "Runner",
        #export_method: "app-store",

@@ -53,3 +53,5 @@ jobs:
           FASTLANE_VERBOSE: 1
           APP_STORE_KEY_ID: ${{ secrets.APP_STORE_KEY_ID }}
           APP_STORE_ISSUER_ID: ${{ secrets.APP_STORE_ISSUER_ID }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }} # Secret for match repo password
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Token to access private repo (if necessary)

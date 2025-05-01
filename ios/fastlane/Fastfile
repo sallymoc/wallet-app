@@ -57,23 +57,38 @@ platform :ios do
     apps = Spaceship::ConnectAPI::App.all
     UI.message("🔍 Found #{apps.count} app(s) in App Store Connect.")
 
+    match(type: "appstore")  # Fetch certificates and provisioning profiles from your certificates repo
+
     build_app(
       scheme: "Runner",
       export_method: "app-store",
-      configuration: "Release",   # <- FORCE Release build
+      configuration: "Release",   # FORCE Release build
       skip_package_ipa: false,
-      silent: false,
       clean: true,
       xcargs: "-allowProvisioningUpdates",
       export_options: {
-        signingStyle: "automatic",
-        method: "app-store",
-        provisioningProfiles: {
-          "org.qubic.wallet" => "Wallet distribution profile"
-        },
+        signingStyle: "automatic",  # Let Xcode handle the signing
+        method: "app-store",  # Export method for distribution to TestFlight
         manageAppVersionAndBuildNumber: true
       }
     )
+     #build_app(
+      # scheme: "Runner",
+       #export_method: "app-store",
+       #c#onfiguration: "Release",   # <- FORCE Release build
+       #skip_package_ipa: false,
+       #silent: false,
+       #clean: true,
+       #xcargs: "-allowProvisioningUpdates",
+       #export_options: {
+         #signingStyle: "automatic",
+         #method: "app-store",
+         #provisioningProfiles: {
+          # "org.qubic.wallet" => "Wallet distribution profile"
+        # },
+      #   manageAppVersionAndBuildNumber: true
+      # }
+     #)
 
     upload_to_testflight(
       skip_waiting_for_build_processing: true,

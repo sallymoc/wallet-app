@@ -1,0 +1,3 @@
+git_url("https://github.com/qubic/wallet-app-ios-certificates.git")
+type("appstore") # or "adhoc", "development" depending on what you're using
+readonly(true) # Set this to `false` if you want to modify certificates in the repo

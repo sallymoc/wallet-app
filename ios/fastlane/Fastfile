@@ -57,7 +57,12 @@ platform :ios do
     apps = Spaceship::ConnectAPI::App.all
     UI.message("🔍 Found #{apps.count} app(s) in App Store Connect.")
 
-    match(type: "appstore")  # Fetch certificates and provisioning profiles from your certificates repo
+    #match(type: "appstore")  # Fetch certificates and provisioning profiles from your certificates repo
+
+    match(
+      type: "appstore",
+      keychain_password: ENV["P12_PASSWORD"]
+    )
 
     build_app(
       scheme: "Runner",

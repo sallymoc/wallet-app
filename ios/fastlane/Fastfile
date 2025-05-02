@@ -74,11 +74,13 @@ platform :ios do
     puts "Installed certificates: #{result}"
 
     build_app(
+      workspace: "Runner.xcworkspace",
       scheme: "Runner",
       configuration: "Release",
       export_method: "app-store",
       clean: true,
-      silent: false
+      silent: false,
+      verbose: ture
       #xcargs: "-allowProvisioningUpdates",
       #export_options: {
       #  signingStyle: "automatic",

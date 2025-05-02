@@ -65,7 +65,21 @@ platform :ios do
     )
     
     sh("ls ~/Library/MobileDevice/Provisioning\\ Profiles/")
-    
+
+    # Check if distribution certificate is installed
+    # This will return a list of installed certificates for code signing
+    result = sh("security find-identity -v -p codesigning")
+  
+    # Output the result
+    puts "Installed certificates: #{result}"
+
+    # Check if your distribution certificate is listed
+    if result.include?("iPhone Distribution")
+      puts "Distribution certificate is installed!"
+    else
+      UI.user_error!("Distribution certificate is not installed!")
+    end
+
     build_app(
       scheme: "Runner",
       export_method: "app-store",

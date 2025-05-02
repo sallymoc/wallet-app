@@ -19,7 +19,7 @@ jobs:
       - name: 📥 Checkout repository
         uses: actions/checkout@v4
 
-      - name: 📶 Set up Flutter
+      - name: 💻 Set up Flutter
         uses: ./.github/actions/setup-flutter
 
       #- name: 📅 Cache Flutter pub packages
@@ -39,16 +39,15 @@ jobs:
         env:
           APP_STORE_API_KEY: ${{ secrets.APP_STORE_API_KEY }}
 
-      - name: 🧵 Clean CocoaPods Cache
+      - name: 🔧 Install CocoaPods
+        run: |
+          sudo gem install cocoapods --no-document
+
+      - name: 🧼 Clean CocoaPods and Reinstall
         run: |
           cd ios
           pod deintegrate
-          pod install --verbose --no-repo-update
-
-      - name: 🧵 Install CocoaPods
-        run: |
-          sudo gem install cocoapods --no-document
-          cd ios
+          pod cache clean --all
           pod install --verbose --no-repo-update
 
       - name: Set up SSH key

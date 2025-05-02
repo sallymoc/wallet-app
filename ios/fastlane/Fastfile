@@ -80,7 +80,7 @@ platform :ios do
       export_method: "app-store",
       clean: true,
       silent: false,
-      verbose: ture
+      verbose: true
       #xcargs: "-allowProvisioningUpdates",
       #export_options: {
       #  signingStyle: "automatic",

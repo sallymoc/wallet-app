@@ -78,12 +78,12 @@ platform :ios do
       scheme: "Runner",
       configuration: "Release",
       export_method: "app-store",
-      clean: true,
-      xcargs: "-allowProvisioningUpdates",
-      export_options: {
-        signingStyle: "automatic",
-        manageAppVersionAndBuildNumber: true
-      }
+      clean: true#,
+      #xcargs: "-allowProvisioningUpdates",
+      #export_options: {
+      #  signingStyle: "automatic",
+      #  manageAppVersionAndBuildNumber: true
+     # }
     )
     
      #build_app(

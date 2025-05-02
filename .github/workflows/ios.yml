@@ -63,6 +63,10 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
 
+      - name: Clean Git workspace
+        run: |
+          rm -rf .git
+
       - name: 🚀 Build and upload to TestFlight
         run: |
           cd ios

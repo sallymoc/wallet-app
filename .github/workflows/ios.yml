@@ -68,6 +68,12 @@ jobs:
       - name: Clean Xcode Derived Data
         run: rm -rf ~/Library/Developer/Xcode/DerivedData
 
+      - name: 🔧 Set FLUTTER_ROOT
+        run: echo "FLUTTER_ROOT=$(flutter sdk-path)" >> $GITHUB_ENV
+
+      - name: Verify FLUTTER_ROOT
+        run: echo "FLUTTER_ROOT is $FLUTTER_ROOT"
+
       - name: 🚀 Build and upload to TestFlight
         run: |
           cd ios

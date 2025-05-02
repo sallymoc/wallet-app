@@ -39,11 +39,17 @@ jobs:
         env:
           APP_STORE_API_KEY: ${{ secrets.APP_STORE_API_KEY }}
 
+      - name: 🧵 Clean CocoaPods Cache
+        run: |
+          cd ios
+          pod deintegrate
+          pod install --verbose --no-repo-update
+
       - name: 🧵 Install CocoaPods
         run: |
-          sudo gem install cocoapods
+          sudo gem install cocoapods --no-document
           cd ios
-          pod install
+          pod install --verbose --no-repo-update
 
       - name: Set up SSH key
         run: |
@@ -66,11 +72,10 @@ jobs:
       - name: 🚀 Build and upload to TestFlight
         run: |
           cd ios
-          fastlane ci_testflight_release
+          timeout 20m fastlane ci_testflight_release
         env:
           FASTLANE_VERBOSE: 1
           APP_STORE_KEY_ID: ${{ secrets.APP_STORE_KEY_ID }}
           APP_STORE_ISSUER_ID: ${{ secrets.APP_STORE_ISSUER_ID }}
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }} # Secret for match repo password
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          P12_PASSWORD: ${{ secrets.P12_PASSWORD }}

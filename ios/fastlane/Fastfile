@@ -77,15 +77,8 @@ platform :ios do
     build_app(
       scheme: "Runner",
       export_method: "app-store",
-      configuration: "Release",
-      clean: true,
-      export_options: {
-        signingStyle: "manual",
-        provisioningProfiles: {
-          "org.qubic.wallet" => "match AppStore org.qubic.wallet"
-        }
-      }
-    )    
+      xcargs: "-allowProvisioningUpdates"
+    )
     
      #build_app(
       # scheme: "Runner",

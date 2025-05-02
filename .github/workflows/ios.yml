@@ -45,12 +45,12 @@ jobs:
           cd ios
           pod install
 
-      - name: Set up SSH key for Fastlane Match
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.MATCH_DEPLOY_KEY }}" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
+      #- name: Set up SSH key for Fastlane Match
+      #  run: |
+      #   mkdir -p ~/.ssh
+      #  echo "${{ secrets.MATCH_DEPLOY_KEY }}" > ~/.ssh/id_ed25519
+      # chmod 600 ~/.ssh/id_ed25519
+      #ssh-keyscan github.com >> ~/.ssh/known_hosts
 
       - name: Set up SSH key
         run: |
@@ -68,4 +68,5 @@ jobs:
           APP_STORE_KEY_ID: ${{ secrets.APP_STORE_KEY_ID }}
           APP_STORE_ISSUER_ID: ${{ secrets.APP_STORE_ISSUER_ID }}
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }} # Secret for match repo password
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Token to access private repo (if necessary)
+          #GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Token to access private repo (if necessary)
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}

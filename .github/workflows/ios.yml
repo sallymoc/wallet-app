@@ -22,14 +22,14 @@ jobs:
       - name: 📶 Set up Flutter
         uses: ./.github/actions/setup-flutter
 
-      - name: 📅 Cache Flutter pub packages
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.pub-cache
-          key: ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-flutter-
+      #- name: 📅 Cache Flutter pub packages
+      # uses: actions/cache@v3
+      #with:
+      # path: |
+      #  ~/.pub-cache
+      #key: ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.yaml') }}
+      #restore-keys: |
+      # ${{ runner.os }}-flutter-
 
       - name: 📦 Install Flutter dependencies
         run: flutter pub get
@@ -45,13 +45,6 @@ jobs:
           cd ios
           pod install
 
-      #- name: Set up SSH key for Fastlane Match
-      #  run: |
-      #   mkdir -p ~/.ssh
-      #  echo "${{ secrets.MATCH_DEPLOY_KEY }}" > ~/.ssh/id_ed25519
-      # chmod 600 ~/.ssh/id_ed25519
-      #ssh-keyscan github.com >> ~/.ssh/known_hosts
-
       - name: Set up SSH key
         run: |
           mkdir -p ~/.ssh
@@ -66,6 +59,9 @@ jobs:
       - name: Clean Git workspace
         run: |
           rm -rf .git
+
+      - name: Clean Xcode Derived Data
+        run: rm -rf ~/Library/Developer/Xcode/DerivedData
 
       - name: 🚀 Build and upload to TestFlight
         run: |

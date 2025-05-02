@@ -376,7 +376,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" build";
+			shellScript = "echo \"=== Starting Flutter Build Phase ===\"\necho \"FLUTTER_ROOT is $FLUTTER_ROOT\"\n\n# Add the actual script that runs\n/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" build\n\necho \"=== Finished Flutter Build Phase ===\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

@@ -63,6 +63,13 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
 
+      - name: Set up keychain password
+        run: |
+          echo "$P12_PASSWORD" > ~/p12_password.txt
+          security import ~/p12_password.txt -k ~/Library/Keychains/login.keychain
+        env:
+          P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
+
       - name: 🚀 Build and upload to TestFlight
         run: |
           cd ios

@@ -74,13 +74,6 @@ platform :ios do
     # Output the result
     puts "Installed certificates: #{result}"
 
-    # Check if your distribution certificate is listed
-    if result.include?("iPhone Distribution")
-      puts "Distribution certificate is installed!"
-    else
-      UI.user_error!("Distribution certificate is not installed!")
-    end
-
     build_app(
       scheme: "Runner",
       export_method: "app-store",

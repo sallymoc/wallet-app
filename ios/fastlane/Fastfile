@@ -64,6 +64,8 @@ platform :ios do
       keychain_password: ENV["P12_PASSWORD"]
     )
     
+    sh("ls ~/Library/MobileDevice/Provisioning\\ Profiles/")
+    
     build_app(
       scheme: "Runner",
       export_method: "app-store",

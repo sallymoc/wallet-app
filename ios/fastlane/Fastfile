@@ -61,7 +61,8 @@ platform :ios do
 
     match(
       type: "appstore",
-      keychain_password: ENV["P12_PASSWORD"]
+      #keychain_password: ENV["P12_PASSWORD"],
+      p12_password: ENV["P12_PASSWORD"]
     )
     
     sh("ls ~/Library/MobileDevice/Provisioning\\ Profiles/")

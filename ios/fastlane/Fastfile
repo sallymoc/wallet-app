@@ -63,18 +63,19 @@ platform :ios do
       type: "appstore",
       keychain_password: ENV["P12_PASSWORD"]
     )
-
+    
     build_app(
       scheme: "Runner",
       export_method: "app-store",
       configuration: "Release",
       clean: true,
-      xcargs: "-allowProvisioningUpdates",
       export_options: {
-        signingStyle: "automatic",
-        manageAppVersionAndBuildNumber: true
+        signingStyle: "manual",
+        provisioningProfiles: {
+          "org.qubic.wallet" => "match AppStore org.qubic.wallet"
+        }
       }
-    )
+    )    
     
      #build_app(
       # scheme: "Runner",

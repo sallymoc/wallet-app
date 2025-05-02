@@ -76,8 +76,14 @@ platform :ios do
 
     build_app(
       scheme: "Runner",
+      configuration: "Release",
       export_method: "app-store",
-      xcargs: "-allowProvisioningUpdates"
+      clean: true,
+      xcargs: "-allowProvisioningUpdates",
+      export_options: {
+        signingStyle: "automatic",
+        manageAppVersionAndBuildNumber: true
+      }
     )
     
      #build_app(

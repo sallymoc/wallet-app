@@ -72,7 +72,7 @@ jobs:
       - name: 🚀 Build and upload to TestFlight
         run: |
           cd ios
-          timeout 20m fastlane ci_testflight_release
+          fastlane ci_testflight_release
         env:
           FASTLANE_VERBOSE: 1
           APP_STORE_KEY_ID: ${{ secrets.APP_STORE_KEY_ID }}

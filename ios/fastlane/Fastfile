@@ -60,9 +60,9 @@ platform :ios do
     #match(type: "appstore")  # Fetch certificates and provisioning profiles from your certificates repo
 
     match(
-      type: "appstore",
+      type: "appstore"#,
       #keychain_password: ENV["P12_PASSWORD"],
-      p12_password: ENV["P12_PASSWORD"]
+      #p12_password: ENV["P12_PASSWORD"]
     )
     
     sh("ls ~/Library/MobileDevice/Provisioning\\ Profiles/")

@@ -88,7 +88,6 @@ jobs:
       - name: 🚀 Build and upload to TestFlight
         run: |
           cd ios
-          NSUnbufferedIO=YES bundle install
           NSUnbufferedIO=YES bundle exec fastlane ci_testflight_release
         env:
           FASTLANE_VERBOSE: 1

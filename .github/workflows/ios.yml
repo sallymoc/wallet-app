@@ -77,6 +77,11 @@ jobs:
       - name: Verify FLUTTER_ROOT
         run: echo "FLUTTER_ROOT is $FLUTTER_ROOT"
 
+      - name: Test Flutter Run Script Location
+        run: |
+          echo "FLUTTER_ROOT=$FLUTTER_ROOT"
+          ls -la "$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh"
+
       - name: 🚀 Build and upload to TestFlight
         run: |
           cd ios

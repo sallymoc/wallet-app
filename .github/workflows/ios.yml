@@ -88,7 +88,7 @@ jobs:
       - name: 🚀 Build and upload to TestFlight
         run: |
           cd ios
-          NSUnbufferedIO=YES bundle exec fastlane ci_testflight_release
+          NSUnbufferedIO=YES fastlane ci_testflight_release
         env:
           FASTLANE_VERBOSE: 1
           APP_STORE_KEY_ID: ${{ secrets.APP_STORE_KEY_ID }}

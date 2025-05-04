@@ -375,7 +375,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#!/bin/sh\nset -ex\n\necho \"🔥 [Run Script] Starting Flutter Xcode build phase\"\n\n# Ensure FLUTTER_ROOT is defined\nif [ -z \"$FLUTTER_ROOT\" ]; then\n  echo \"❌ FLUTTER_ROOT is not set!\"\n  exit 1\nfi\n\necho \"📍 FLUTTER_ROOT: $FLUTTER_ROOT\"\n\n# Set build mode if not already set\nexport FLUTTER_BUILD_MODE=${FLUTTER_BUILD_MODE:-release}\necho \"📦 Build mode: $FLUTTER_BUILD_MODE\"\n\n# Log current directory and environment\necho \"📁 Current directory: $(pwd)\"\necho \"🧪 Invoking xcode_backend.sh...\"\n\n# Add timeout to catch potential hangs\ntimeout 600 \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" build\n\necho \"✅ [Run Script] Finished successfully\"\n";
+			shellScript = "#!/bin/sh\nset -ex\n\necho \"🔥 [Run Script] Starting Flutter Xcode build phase\"\n\n# Ensure FLUTTER_ROOT is defined\nif [ -z \"$FLUTTER_ROOT\" ]; then\n  echo \"❌ FLUTTER_ROOT is not set!\"\n  exit 1\nfi\n\necho \"📍 FLUTTER_ROOT: $FLUTTER_ROOT\"\n\n# Set build mode if not already set\nexport FLUTTER_BUILD_MODE=${FLUTTER_BUILD_MODE:-release}\necho \"📦 Build mode: $FLUTTER_BUILD_MODE\"\n\n# Log current directory and environment\necho \"📁 Current directory: $(pwd)\"\necho \"🧪 Invoking xcode_backend.sh...\"\n\n\"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" build\n\necho \"✅ [Run Script] Finished successfully\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

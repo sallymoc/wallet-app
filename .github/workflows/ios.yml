@@ -85,17 +85,20 @@ jobs:
           echo "FLUTTER_ROOT=$FLUTTER_ROOT"
           ls -la "$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh"
 
-      - name: 🔨 Build iOS using xcodebuild (no signing)
+      - name: 🔨 Build iOS using xcodebuild (direct)
         run: |
           cd ios
+          echo "🧪 Starting xcodebuild..."
           xcodebuild -workspace Runner.xcworkspace \
-            -scheme Runner \
-            -sdk iphonesimulator \
-            -destination 'platform=iOS Simulator,name=iPhone 14' \
-            -configuration Debug \
-            -skipPackagePluginValidation \
-            -showBuildTimingSummary \
-            -verbose | tee ../xcodebuild_output.log
+                     -scheme Runner \
+                     -configuration Debug \
+                     -sdk iphonesimulator \
+                     -destination 'platform=iOS Simulator,name=iPhone 14' \
+                     -showBuildTimingSummary \
+                     -verbose | tee ../xcodebuild_output.log
+
+      - name: 🪵 Print xcodebuild output
+        run: cat xcodebuild_output.log
 
       #- name: 🚀 Build and upload to TestFlight
       # run: |

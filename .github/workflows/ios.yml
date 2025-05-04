@@ -85,13 +85,28 @@ jobs:
           echo "FLUTTER_ROOT=$FLUTTER_ROOT"
           ls -la "$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh"
 
-      - name: 🚀 Build and upload to TestFlight
+      - name: 🔨 Build iOS using xcodebuild (direct)
         run: |
           cd ios
-          NSUnbufferedIO=YES fastlane ci_testflight_release
-        env:
-          FASTLANE_VERBOSE: 1
-          APP_STORE_KEY_ID: ${{ secrets.APP_STORE_KEY_ID }}
-          APP_STORE_ISSUER_ID: ${{ secrets.APP_STORE_ISSUER_ID }}
-          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }} # Secret for match repo password
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          echo "🧪 Starting xcodebuild..."
+          xcodebuild -workspace Runner.xcworkspace \
+                     -scheme Runner \
+                     -configuration Debug \
+                     -sdk iphonesimulator \
+                     -destination 'platform=iOS Simulator,name=iPhone 14' \
+                     -showBuildTimingSummary \
+                     -verbose | tee ../xcodebuild_output.log
+
+      - name: 🪵 Print xcodebuild output
+        run: cat xcodebuild_output.log
+
+      #- name: 🚀 Build and upload to TestFlight
+      # run: |
+      #  cd ios
+      # NSUnbufferedIO=YES fastlane ci_testflight_release
+      #env:
+      # FASTLANE_VERBOSE: 1
+      # APP_STORE_KEY_ID: ${{ secrets.APP_STORE_KEY_ID }}
+      #APP_STORE_ISSUER_ID: ${{ secrets.APP_STORE_ISSUER_ID }}
+      #MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }} # Secret for match repo password
+      #SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}

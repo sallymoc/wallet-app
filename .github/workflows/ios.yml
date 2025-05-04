@@ -95,6 +95,7 @@ jobs:
           APP_STORE_ISSUER_ID: ${{ secrets.APP_STORE_ISSUER_ID }}
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }} # Secret for match repo password
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          XCODE_VERSION: 16.2
 
       - name: 🪵 Dump Full Xcode Gym Log
         if: failure()

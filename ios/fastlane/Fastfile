@@ -6,15 +6,6 @@ platform :ios do
   lane :testflight_release do
     xcversion(version: ENV["XCODE_VERSION"])
 
-    create_keychain(
-      name: "mykeychain",
-      password: "SOME_KEYCHAIN_PASSWORD",
-      default_keychain: true,
-      unlock: true,
-      timeout: 3600,
-    
-    )
-
     app_store_connect_api_key(
       key_id: ENV["APP_STORE_KEY_ID"],
       issuer_id: ENV["APP_STORE_ISSUER_ID"],
@@ -48,6 +39,15 @@ platform :ios do
 
   desc "🤖 CI: Build and upload silently to TestFlight"
   lane :ci_testflight_release do
+
+    create_keychain(
+      name: "mykeychain",
+      password: "SOME_KEYCHAIN_PASSWORD",
+      default_keychain: true,
+      unlock: true,
+      timeout: 3600,
+    
+    )
 
     xcodes(
       version: ENV["XCODE_VERSION"],

@@ -41,8 +41,8 @@ platform :ios do
   lane :ci_testflight_release do
 
     create_keychain(
-      name: "mykeychain",
-      password: "SOME_KEYCHAIN_PASSWORD",
+      name: "my_keychain",
+      password: "my_secure_password",
       default_keychain: true,
       unlock: true,
       timeout: 3600,
@@ -70,7 +70,8 @@ platform :ios do
 
     match(
       type: "appstore"#,
-      #keychain_password: ENV["P12_PASSWORD"]
+      keychain_name: "my_keychain", # Specify the keychain to use
+    keychain_password: "my_secure_password" # Password for the keychain
     )
     
     sh("ls ~/Library/MobileDevice/Provisioning\\ Profiles/")

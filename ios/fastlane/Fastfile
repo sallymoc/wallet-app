@@ -45,8 +45,7 @@ platform :ios do
       password: "my_secure_password",
       default_keychain: true,
       unlock: true,
-      timeout: 3600,
-    
+      timeout: 3600
     )
 
     xcodes(
@@ -71,7 +70,7 @@ platform :ios do
     match(
       type: "appstore"#,
       keychain_name: "my_keychain", # Specify the keychain to use
-    keychain_password: "my_secure_password" # Password for the keychain
+      keychain_password: "my_secure_password" # Password for the keychain
     )
     
     sh("ls ~/Library/MobileDevice/Provisioning\\ Profiles/")

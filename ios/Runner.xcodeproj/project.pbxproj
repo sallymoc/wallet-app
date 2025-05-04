@@ -375,7 +375,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -e\nset -x\necho \"🏗️  Entered check pods script\"\necho \"=== Starting Flutter Build Phase ===\"\necho \"FLUTTER_ROOT is $FLUTTER_ROOT\"\n\n# Add the actual script that runs\n/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" build\n\necho \"=== Finished Flutter Build Phase ===\"\n";
+			shellScript = "set -e\nset -x\n\necho \"🔥 Flutter Build Script Starting...\" 1>&2\n\n# Log environment for debugging\nenv 1>&2\n\n# Trace the Flutter path\necho \"Using FLUTTER_ROOT: $FLUTTER_ROOT\" 1>&2\n\n# Manually call the backend script and flush output aggressively\n/bin/bash -c \"/bin/sh \\\"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\\\" build 2>&1 | tee /dev/stderr\"\n\necho \"✅ Flutter Build Script Finished\" 1>&2\n\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

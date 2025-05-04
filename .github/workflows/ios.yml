@@ -95,3 +95,9 @@ jobs:
           APP_STORE_ISSUER_ID: ${{ secrets.APP_STORE_ISSUER_ID }}
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }} # Secret for match repo password
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: 🪵 Dump Full Xcode Gym Log
+        if: failure()
+        run: |
+          echo "🔍 Checking for Fastlane gym build log..."
+          cat ~/Library/Logs/gym/Runner-Runner.log || echo "No log found."

@@ -68,7 +68,7 @@ platform :ios do
     #match(type: "appstore")  # Fetch certificates and provisioning profiles from your certificates repo
 
     match(
-      type: "appstore"#,
+      type: "appstore",
       keychain_name: "my_keychain", # Specify the keychain to use
       keychain_password: "my_secure_password" # Password for the keychain
     )

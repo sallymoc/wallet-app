@@ -73,15 +73,20 @@ platform :ios do
       keychain_password: "my_secure_password" # Password for the keychain
     )
     
-    sh("ls ~/Library/MobileDevice/Provisioning\\ Profiles/")
+    #sh("ls ~/Library/MobileDevice/Provisioning\\ Profiles/")
 
     # Check if distribution certificate is installed
     # This will return a list of installed certificates for code signing
-    result = sh("security find-identity -v -p codesigning")
+    #result = sh("security find-identity -v -p codesigning")
   
     # Output the result
-    puts "Installed certificates: #{result}"
+    #puts "Installed certificates: #{result}"
 
+    increment_build_number(
+      build_number: latest_testflight_build_number + 1
+    )
+
+    # Build the app using build_app (this will use the incremented build number)
     build_app(
       workspace: "Runner.xcworkspace",
       scheme: "Runner",

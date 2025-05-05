@@ -34,8 +34,8 @@ jobs:
       - name: 📦 Install Flutter dependencies
         run: flutter pub get
 
-      - name: 🔧 Set FLUTTER_ROOT for Xcode
-        run: echo "FLUTTER_ROOT=$HOME/flutter" >> $GITHUB_ENV
+      #- name: 🔧 Set FLUTTER_ROOT for Xcode
+      # run: echo "FLUTTER_ROOT=$HOME/flutter" >> $GITHUB_ENV
 
       - name: 🔐 Decode App Store Connect API key (.p8)
         run: echo "$APP_STORE_API_KEY" | base64 --decode > ios/AuthKey.p8

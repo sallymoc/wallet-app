@@ -41,8 +41,8 @@ platform :ios do
   lane :ci_testflight_release do
 
     create_keychain(
-      name: "my_keychain",
-      password: "my_secure_password",
+      name: "ci_temp_keychain",
+      password: ENV['TEMP_KEYCHAIN_PASSWORD'],
       default_keychain: true,
       unlock: true,
       timeout: 3600
@@ -60,27 +60,11 @@ platform :ios do
       in_house: false
     )
 
-    UI.message("✅ API key authentication succeeded.")
-
-    apps = Spaceship::ConnectAPI::App.all
-    UI.message("🔍 Found #{apps.count} app(s) in App Store Connect.")
-
-    #match(type: "appstore")  # Fetch certificates and provisioning profiles from your certificates repo
-
     match(
       type: "appstore",
-      keychain_name: "my_keychain", # Specify the keychain to use
-      keychain_password: "my_secure_password" # Password for the keychain
+      keychain_name: "ci_temp_keychain", # Specify the keychain to use
+      keychain_password: ENV['TEMP_KEYCHAIN_PASSWORD']# Password for the keychain
     )
-    
-    #sh("ls ~/Library/MobileDevice/Provisioning\\ Profiles/")
-
-    # Check if distribution certificate is installed
-    # This will return a list of installed certificates for code signing
-    #result = sh("security find-identity -v -p codesigning")
-  
-    # Output the result
-    #puts "Installed certificates: #{result}"
 
     increment_build_number(
       build_number: latest_testflight_build_number + 1
@@ -124,6 +108,12 @@ platform :ios do
       skip_waiting_for_build_processing: true,
       distribute_external: false
     )
+
+    # Clean up keychain (optional but good practice)
+    delete_keychain(
+      name: "ci_temp_keychain"
+    )
+    
   end
 
 end

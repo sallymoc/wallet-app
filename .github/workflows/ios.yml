@@ -22,14 +22,14 @@ jobs:
       - name: 💻 Set up Flutter
         uses: ./.github/actions/setup-flutter
 
-      #- name: 📅 Cache Flutter pub packages
-      # uses: actions/cache@v3
-      #with:
-      # path: |
-      #  ~/.pub-cache
-      #key: ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.yaml') }}
-      #restore-keys: |
-      # ${{ runner.os }}-flutter-
+      - name: 📅 Cache Flutter pub packages
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.pub-cache
+          key: ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-flutter-
 
       - name: 📦 Install Flutter dependencies
         run: flutter pub get
@@ -53,7 +53,7 @@ jobs:
           pod cache clean --all
           pod install --verbose --no-repo-update
 
-      - name: Set up SSH key
+      - name: 💻 Set up SSH key
         run: |
           mkdir -p ~/.ssh
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
@@ -64,11 +64,11 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: Clean Git workspace
+      - name: 🧼 Clean Git workspace
         run: |
           rm -rf .git
 
-      - name: Clean Xcode Derived Data
+      - name: 🧼 Clean Xcode Derived Data
         run: rm -rf ~/Library/Developer/Xcode/DerivedData
 
       #- name: 🔧 Set FLUTTER_ROOT
@@ -95,6 +95,7 @@ jobs:
           APP_STORE_ISSUER_ID: ${{ secrets.APP_STORE_ISSUER_ID }}
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }} # Secret for match repo password
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          TEMP_KEYCHAIN_PASSWORD: ${{ secrets.TEMP_KEYCHAIN_PASSWORD }}
           #XCODE_VERSION: 16.2
 
       #- name: 🪵 Dump Full Xcode Gym Log
